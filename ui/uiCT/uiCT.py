@@ -17,18 +17,18 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(800, 762)
+        MainWindow.resize(800, 822)
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
-        self.widget = QWidget(self.centralwidget)
-        self.widget.setObjectName(u"widget")
-        self.widget.setGeometry(QRect(15, 0, 771, 711))
-        self.horizontalLayout = QHBoxLayout(self.widget)
+        self.layoutWidget = QWidget(self.centralwidget)
+        self.layoutWidget.setObjectName(u"layoutWidget")
+        self.layoutWidget.setGeometry(QRect(15, 0, 772, 761))
+        self.horizontalLayout = QHBoxLayout(self.layoutWidget)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
         self.gridLayout = QGridLayout()
         self.gridLayout.setObjectName(u"gridLayout")
-        self.label = QLabel(self.widget)
+        self.label = QLabel(self.layoutWidget)
         self.label.setObjectName(u"label")
         sizePolicy = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
@@ -43,40 +43,44 @@ class Ui_MainWindow(object):
 
         self.gridLayout.addWidget(self.label, 0, 0, 1, 1)
 
-        self.label_2 = QLabel(self.widget)
+        self.label_2 = QLabel(self.layoutWidget)
         self.label_2.setObjectName(u"label_2")
         self.label_2.setFont(font)
         self.label_2.setAlignment(Qt.AlignCenter)
 
         self.gridLayout.addWidget(self.label_2, 0, 1, 1, 1)
 
-        self.imglabel1 = QLabel(self.widget)
+        self.imglabel1 = QLabel(self.layoutWidget)
         self.imglabel1.setObjectName(u"imglabel1")
-        sizePolicy1 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Preferred)
+        sizePolicy1 = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
         sizePolicy1.setHorizontalStretch(0)
         sizePolicy1.setVerticalStretch(0)
         sizePolicy1.setHeightForWidth(self.imglabel1.sizePolicy().hasHeightForWidth())
         self.imglabel1.setSizePolicy(sizePolicy1)
+        self.imglabel1.setMinimumSize(QSize(320, 320))
+        self.imglabel1.setMaximumSize(QSize(320, 320))
         self.imglabel1.setMargin(10)
 
         self.gridLayout.addWidget(self.imglabel1, 1, 0, 1, 1)
 
-        self.imglabel2 = QLabel(self.widget)
+        self.imglabel2 = QLabel(self.layoutWidget)
         self.imglabel2.setObjectName(u"imglabel2")
         sizePolicy1.setHeightForWidth(self.imglabel2.sizePolicy().hasHeightForWidth())
         self.imglabel2.setSizePolicy(sizePolicy1)
+        self.imglabel2.setMinimumSize(QSize(320, 320))
+        self.imglabel2.setMaximumSize(QSize(320, 320))
         self.imglabel2.setMargin(10)
 
         self.gridLayout.addWidget(self.imglabel2, 1, 1, 1, 1)
 
-        self.label_3 = QLabel(self.widget)
+        self.label_3 = QLabel(self.layoutWidget)
         self.label_3.setObjectName(u"label_3")
         self.label_3.setFont(font)
         self.label_3.setAlignment(Qt.AlignCenter)
 
         self.gridLayout.addWidget(self.label_3, 2, 0, 1, 1)
 
-        self.label_4 = QLabel(self.widget)
+        self.label_4 = QLabel(self.layoutWidget)
         self.label_4.setObjectName(u"label_4")
         sizePolicy.setHeightForWidth(self.label_4.sizePolicy().hasHeightForWidth())
         self.label_4.setSizePolicy(sizePolicy)
@@ -85,13 +89,22 @@ class Ui_MainWindow(object):
 
         self.gridLayout.addWidget(self.label_4, 2, 1, 1, 1)
 
-        self.imglabel3 = QLabel(self.widget)
+        self.imglabel3 = QLabel(self.layoutWidget)
         self.imglabel3.setObjectName(u"imglabel3")
+        sizePolicy1.setHeightForWidth(self.imglabel3.sizePolicy().hasHeightForWidth())
+        self.imglabel3.setSizePolicy(sizePolicy1)
+        self.imglabel3.setMinimumSize(QSize(320, 320))
+        self.imglabel3.setMaximumSize(QSize(320, 320))
 
         self.gridLayout.addWidget(self.imglabel3, 3, 0, 1, 1)
 
-        self.imglabel4 = QLabel(self.widget)
+        self.imglabel4 = QLabel(self.layoutWidget)
         self.imglabel4.setObjectName(u"imglabel4")
+        sizePolicy1.setHeightForWidth(self.imglabel4.sizePolicy().hasHeightForWidth())
+        self.imglabel4.setSizePolicy(sizePolicy1)
+        self.imglabel4.setMinimumSize(QSize(320, 320))
+        self.imglabel4.setMaximumSize(QSize(320, 320))
+        self.imglabel4.setBaseSize(QSize(0, 0))
         self.imglabel4.setMargin(10)
 
         self.gridLayout.addWidget(self.imglabel4, 3, 1, 1, 1)
@@ -106,7 +119,7 @@ class Ui_MainWindow(object):
         self.verticalLayout = QVBoxLayout()
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.verticalLayout.setSizeConstraint(QLayout.SetMinimumSize)
-        self.openButton = QPushButton(self.widget)
+        self.openButton = QPushButton(self.layoutWidget)
         self.openButton.setObjectName(u"openButton")
         sizePolicy2 = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Fixed)
         sizePolicy2.setHorizontalStretch(0)
@@ -120,18 +133,15 @@ class Ui_MainWindow(object):
 
         self.verticalLayout.addWidget(self.openButton)
 
-        self.parallelButton = QPushButton(self.widget)
+        self.parallelButton = QPushButton(self.layoutWidget)
         self.parallelButton.setObjectName(u"parallelButton")
-        sizePolicy3 = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
-        sizePolicy3.setHorizontalStretch(0)
-        sizePolicy3.setVerticalStretch(0)
-        sizePolicy3.setHeightForWidth(self.parallelButton.sizePolicy().hasHeightForWidth())
-        self.parallelButton.setSizePolicy(sizePolicy3)
+        sizePolicy2.setHeightForWidth(self.parallelButton.sizePolicy().hasHeightForWidth())
+        self.parallelButton.setSizePolicy(sizePolicy2)
         self.parallelButton.setFont(font1)
 
         self.verticalLayout.addWidget(self.parallelButton)
 
-        self.reconstructButton = QPushButton(self.widget)
+        self.reconstructButton = QPushButton(self.layoutWidget)
         self.reconstructButton.setObjectName(u"reconstructButton")
         sizePolicy2.setHeightForWidth(self.reconstructButton.sizePolicy().hasHeightForWidth())
         self.reconstructButton.setSizePolicy(sizePolicy2)
@@ -139,7 +149,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout.addWidget(self.reconstructButton)
 
-        self.filterReconstructionButton = QPushButton(self.widget)
+        self.filterReconstructionButton = QPushButton(self.layoutWidget)
         self.filterReconstructionButton.setObjectName(u"filterReconstructionButton")
         sizePolicy2.setHeightForWidth(self.filterReconstructionButton.sizePolicy().hasHeightForWidth())
         self.filterReconstructionButton.setSizePolicy(sizePolicy2)
@@ -147,7 +157,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout.addWidget(self.filterReconstructionButton)
 
-        self.closeButton = QPushButton(self.widget)
+        self.closeButton = QPushButton(self.layoutWidget)
         self.closeButton.setObjectName(u"closeButton")
         sizePolicy2.setHeightForWidth(self.closeButton.sizePolicy().hasHeightForWidth())
         self.closeButton.setSizePolicy(sizePolicy2)

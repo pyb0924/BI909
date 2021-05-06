@@ -1,11 +1,11 @@
 import numpy as np
-from scipy import fft
+from scipy import fft, ifft
 
 
-def getRotatedCoords(x, y, matrix):
+def getRotatedCoords(x, y, matrix, size):
     src = np.vstack((x, y, np.ones_like(x)))
     dst = np.floor(matrix @ src).astype(int)
-    dst[dst > 255] = 255
+    dst[dst > size - 1] = size - 1
     return dst
 
 
@@ -16,7 +16,7 @@ def getRotated(image, transform_matrix, scanLineNum):
     for scanLine in np.arange(scanLineNum):
         coord_x = np.arange(size)
         coord_y = np.full_like(coord_x, scanLine)
-        transformed = getRotatedCoords(coord_x, coord_y, transform_matrix)
+        transformed = getRotatedCoords(coord_x, coord_y, transform_matrix, size)
         rotated[scanLine] = np.mean(image[transformed[0], transformed[1]]) if transformed.size else 0
 
     return rotated
@@ -76,3 +76,11 @@ def _get_fourier_filter(size, filter_name):
         fourier_filter[:] = 1
 
     return fourier_filter[:, np.newaxis]
+
+
+# Apply filter in Fourier domain
+def _iradon_filter(image, filter_name):
+    img_shape = image.shape[0]
+    fourier_filter = _get_fourier_filter(img_shape, filter_name)
+    projection = fft(image, axis=0) * fourier_filter
+    return np.real(ifft(projection, axis=0)[:img_shape, :])

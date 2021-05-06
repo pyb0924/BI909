@@ -1,7 +1,7 @@
 import numpy as np
 from src._utils import getRotated
 
-
+# TODO reconstruct
 def radon(image, thetaNum=180, scanLineNum=None):
     """
     Calculates the radon transform of an image given specified
@@ -33,19 +33,10 @@ def radon(image, thetaNum=180, scanLineNum=None):
         raise ValueError('The input image must be 2-D')
 
     theta = np.arange(thetaNum)
-
     shape_min = min(image.shape)
-    img_shape = np.array(image.shape)
 
-    # Crop image to make it square
-    slices = tuple(slice(int(np.ceil(excess / 2)),
-                         int(np.ceil(excess / 2) + shape_min))
-                   if excess > 0 else slice(None)
-                   for excess in (img_shape - shape_min))
-    padded_image = image[slices]
-
-    center = padded_image.shape[0] // 2
-    radon_image = np.zeros((padded_image.shape[0], len(theta)),
+    center = image.shape[0] // 2
+    radon_image = np.zeros((image.shape[0], len(theta)),
                            dtype=image.dtype)
 
     if scanLineNum is None:
@@ -57,7 +48,8 @@ def radon(image, thetaNum=180, scanLineNum=None):
         R = np.array([[cos_a, -sin_a, -center * (cos_a - sin_a - 1)],
                       [sin_a, cos_a, -center * (cos_a + sin_a - 1)],
                       [0, 0, 1]])
-        rotated_data = getRotated(padded_image, R, scanLineNum)
+        rotated_data = getRotated(image, R, scanLineNum)
         radon_image[:, i] = rotated_data
 
+    print('Radon transform finished')
     return radon_image

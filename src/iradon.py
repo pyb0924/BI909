@@ -1,21 +1,10 @@
 import numpy as np
 from functools import partial
 from scipy.interpolate import interp1d
-from src._utils import _get_fourier_filter
-from scipy.fft import fft, ifft
+from src._utils import _iradon_filter
 
 
-# Apply filter in Fourier domain
-def _iradon_filter(image, filter_name):
-    if filter_name is None:
-        return image
-    img_shape = image.shape[0]
-    fourier_filter = _get_fourier_filter(img_shape, filter_name)
-    projection = fft(image, axis=0) * fourier_filter
-    return np.real(ifft(projection, axis=0)[:img_shape, :])
-
-
-def iradon(radon_image, theta=None, filter_name=None, interpolation="linear"):
+def iradon(radon_image, angles_count=180, filter_name=None, interpolation="linear"):
     """Inverse radon transform.
 
     Reconstruct an image from the radon transform, using the filtered
@@ -29,8 +18,8 @@ def iradon(radon_image, theta=None, filter_name=None, interpolation="linear"):
         angle. The tomography rotation axis should lie at the pixel
         index ``radon_image.shape[0] // 2`` along the 0th dimension of
         ``radon_image``.
-    theta : array_like, optional
-        Reconstruction angles (in degrees). Default: m angles evenly spaced
+    angles_count : array_like, optional
+        Number of construction angles (in degrees). Default: m angles evenly spaced
         between 0 and 180 (if the shape of `radon_image` is (N, M)).
 
     filter_name : str, optional
@@ -58,10 +47,8 @@ def iradon(radon_image, theta=None, filter_name=None, interpolation="linear"):
            the Fourth IEEE Region 10 International Conference, TENCON '89, 1989
 
     """
-    if theta is None:
-        theta = np.linspace(0, 180, radon_image.shape[1], endpoint=False)
+    theta = np.linspace(0, 180, angles_count, endpoint=False)
 
-    angles_count = len(theta)
     img_shape = radon_image.shape[0]
     output_size = radon_image.shape[0]
 
@@ -82,8 +69,9 @@ def iradon(radon_image, theta=None, filter_name=None, interpolation="linear"):
                                    bounds_error=False, fill_value=0)
         reconstructed += interpolant(t)
 
-    #out_reconstruction_circle = (xpr ** 2 + ypr ** 2) > radius ** 2
-    #reconstructed[out_reconstruction_circle] = 0.
+    out_reconstruction_circle = (xpr ** 2 + ypr ** 2) >= radius ** 2
+    # reconstructed[out_reconstruction_circle] = 0
     reconstructed[reconstructed < 0] = 0
 
+    print('iRadon transform finished')
     return reconstructed * np.pi / (2 * angles_count)
