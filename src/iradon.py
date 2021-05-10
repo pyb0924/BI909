@@ -13,19 +13,15 @@ def iradon(radon_image, angles_count=180, filter_name=None, interpolation="linea
     Parameters
     ----------
     radon_image : ndarray
-        Image containing radon transform (sinogram). Each column of
-        the image corresponds to a projection along a different
-        angle. The tomography rotation axis should lie at the pixel
-        index ``radon_image.shape[0] // 2`` along the 0th dimension of
-        ``radon_image``.
+        Image containing radon transform (sinogram). 
+    
     angles_count : array_like, optional
-        Number of construction angles (in degrees). Default: m angles evenly spaced
-        between 0 and 180 (if the shape of `radon_image` is (N, M)).
+        Number of construction angles (in degrees). Default: linspace(0,180,180)
 
     filter_name : str, optional
-        Filter used in frequency domain filtering. Ramp filter used by default.
+        Filter used in frequency domain filtering. 
         Filters available: ramp, shepp-logan, cosine, hamming, hann.
-        Assign None to use no filter.
+
     interpolation : str, optional
         Interpolation method used in reconstruction. Methods available:
         'linear', 'nearest', and 'cubic' ('cubic' is slow).
@@ -36,16 +32,6 @@ def iradon(radon_image, angles_count=180, filter_name=None, interpolation="linea
         Reconstructed image. The rotation axis will be located in the pixel
         with indices
         ``(reconstructed.shape[0] // 2, reconstructed.shape[1] // 2)``.
-
-
-    References
-    ----------
-    .. [1] AC Kak, M Slaney, "Principles of Computerized Tomographic
-           Imaging", IEEE Press 1988.
-    .. [2] B.R. Ramesh, N. Srinivasa, K. Rajgopal, "An Algorithm for Computing
-           the Discrete Radon Transform With Some Applications", Proceedings of
-           the Fourth IEEE Region 10 International Conference, TENCON '89, 1989
-
     """
     theta = np.linspace(0, 180, angles_count, endpoint=False)
 
