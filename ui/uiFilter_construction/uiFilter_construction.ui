@@ -55,11 +55,11 @@
        </font>
       </property>
       <property name="currentText">
-       <string>None</string>
+       <string>ramp</string>
       </property>
       <item>
        <property name="text">
-        <string>None</string>
+        <string>ramp</string>
        </property>
       </item>
       <item>
@@ -75,11 +75,6 @@
       <item>
        <property name="text">
         <string>cosine</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>ramp</string>
        </property>
       </item>
       <item>

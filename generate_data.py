@@ -1,7 +1,7 @@
 from phantominator import shepp_logan
 import cv2
 
-size_list = [128 * 2 ** i for i in range(4)]
+size_list = [256 * 2 ** i for i in range(3)]
 
 if __name__ == '__main__':
     for size in size_list:

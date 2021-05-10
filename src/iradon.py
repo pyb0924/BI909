@@ -69,8 +69,9 @@ def iradon(radon_image, angles_count=180, filter_name=None, interpolation="linea
                                    bounds_error=False, fill_value=0)
         reconstructed += interpolant(t)
 
-    out_reconstruction_circle = (xpr ** 2 + ypr ** 2) >= radius ** 2
-    # reconstructed[out_reconstruction_circle] = 0
+    if filter_name is not None:
+        out_reconstruction_circle = (xpr ** 2 + ypr ** 2) >= radius ** 2 - 10 * radius
+        reconstructed[out_reconstruction_circle] = 0
     reconstructed[reconstructed < 0] = 0
 
     print('iRadon transform finished')
