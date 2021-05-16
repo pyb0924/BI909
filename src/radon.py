@@ -18,8 +18,6 @@ def radon(image, thetaNum=180, scanLineNum=None):
     radon_image : ndarray
         Radon transform (sinogram).  The tomography rotation axis will lie at the pixel index ``radon_image.shape[0] // 2`` along the 0th dimension of ``radon_image``.
     """
-    if image.ndim != 2:
-        raise ValueError('The input image must be 2-D')
 
     theta = np.arange(thetaNum)
     shape_min = min(image.shape)

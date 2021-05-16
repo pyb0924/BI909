@@ -29,18 +29,17 @@ def iradon(radon_image, angles_count=180, filter_name=None, interpolation="linea
     Returns
     -------
     reconstructed : ndarray
-        Reconstructed image. The rotation axis will be located in the pixel
-        with indices
-        ``(reconstructed.shape[0] // 2, reconstructed.shape[1] // 2)``.
+        Reconstructed image. 
     """
     theta = np.linspace(0, 180, angles_count, endpoint=False)
 
     img_shape = radon_image.shape[0]
     output_size = radon_image.shape[0]
 
+    # Do filter
     radon_filtered = _iradon_filter(radon_image, filter_name)
 
-    # Reconstruct image by interpolation
+    # Reconstruct image
     reconstructed = np.zeros((output_size, output_size))
     radius = output_size // 2
     xpr, ypr = np.mgrid[:output_size, :output_size] - radius
@@ -48,13 +47,11 @@ def iradon(radon_image, angles_count=180, filter_name=None, interpolation="linea
 
     for col, angle in zip(radon_filtered.T, np.deg2rad(theta)):
         t = ypr * np.cos(angle) - xpr * np.sin(angle)
-        if interpolation == 'linear':
-            interpolant = partial(np.interp, xp=x, fp=col, left=0, right=0)
-        else:
-            interpolant = interp1d(x, col, kind=interpolation,
-                                   bounds_error=False, fill_value=0)
+        
+        interpolant = interp1d(x, col, kind=interpolation,bounds_error=False, fill_value=0)
         reconstructed += interpolant(t)
 
+    # Background processing
     if filter_name is not None:
         out_reconstruction_circle = (xpr ** 2 + ypr ** 2) >= radius ** 2 - 10 * radius
         reconstructed[out_reconstruction_circle] = 0
