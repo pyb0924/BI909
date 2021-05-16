@@ -1,7 +1,7 @@
-,file,method,radon,iradon(direct),iradon(filter)
-0,res\shepp-logan1024.jpg,my algorithm,16.071001052856445,17.378370761871338,17.721486568450928
-1,res\shepp-logan1024.jpg,skimage,8.743618726730347,6.075470924377441,6.042676687240601
-2,res\shepp-logan256.jpg,my algorithm,2.697828769683838,1.0013253688812256,0.9653980731964111
-3,res\shepp-logan256.jpg,skimage,0.47080421447753906,0.29621171951293945,0.29917025566101074
-4,res\shepp-logan512.jpg,my algorithm,6.345755100250244,3.999350070953369,4.016683101654053
-5,res\shepp-logan512.jpg,skimage,2.080444574356079,1.432159423828125,1.4172093868255615
+file,method,radon,iradon(direct),iradon(filter)
+res\shepp-logan1024.jpg,my algorithm,15.82,17.22,17.09
+res\shepp-logan1024.jpg,skimage,8.53,5.84,5.82
+res\shepp-logan256.jpg,my algorithm,2.59,1.0,0.96
+res\shepp-logan256.jpg,skimage,0.51,0.3,0.3
+res\shepp-logan512.jpg,my algorithm,5.95,4.08,4.18
+res\shepp-logan512.jpg,skimage,2.07,1.44,1.61

@@ -1,5 +1,4 @@
 import numpy as np
-from functools import partial
 from scipy.interpolate import interp1d
 from src._utils import _iradon_filter
 
